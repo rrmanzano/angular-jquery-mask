@@ -1,4 +1,4 @@
-var app = angular.module('app', ['mask-plugin']);
+var app = angular.module('app', ['angular-mask-plugin']);
 app.controller('exampleController', ['$scope',
   function($scope) {
 

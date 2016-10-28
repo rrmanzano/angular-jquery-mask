@@ -1,5 +1,5 @@
 angular
-  .module('mask-plugin', [])
+  .module('angular-mask-plugin', [])
   .directive('maskInput', function() {
     return {
       restrict: 'A',
