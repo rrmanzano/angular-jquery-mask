@@ -1,3 +1,9 @@
+/**
+ * angular-jquery-mask - v0.1
+ * A simple wrapper for jquery.mask.js by @igorescobar. This directive allows you to add a mask based on jquery.mask.js plugin.
+ * https://github.com/rrmanzano/angular-jquery-mask
+ * License: MIT http://opensource.org/licenses/MIT
+ */
 angular
   .module('angular-mask-plugin', [])
   .directive('maskInput', function() {
@@ -9,7 +15,7 @@ angular
       },
       link: function(scope, element, attrs, ngModel) {
 
-        var options = {}, mappedEvents = new Array();
+        var options = {};
         if (scope.options){
           options = scope.$eval(attrs.maskOptions);
         }
@@ -26,31 +32,6 @@ angular
           return element.masked(value);
         });
 
-        var callEvent = function(){
-          var args = arguments;
-          var cb = args[0];
-          args = args[1];
-
-          var mapped = mappedEvents.find(function(x) { return x.fn == cb });
-          if (!mapped){
-            return;
-          }
-
-          var fn = scope.$parent.$eval(mapped.fn);
-          if (!fn)
-          {
-            return;
-          }
-
-          if (!scope.$root.$$phase) {
-              scope.$parent.$apply(function () {
-                  fn.apply(scope.$parent, args);
-              });
-          } else {
-              fn.apply(scope.$parent, args);
-          }
-        }
-
         var mapEvents = function(){
           if (attrs.maskEvents){
             var evMap = attrs.maskEvents.split(';');
@@ -60,9 +41,22 @@ angular
                     var name = map[0];
                     var cb = map[1];
 
-                    mappedEvents.push({ name:name, fn: cb });
                     options[name] = function () {
-                      callEvent(cb, arguments);
+                      var args = arguments;
+                      var fn = scope.$parent.$eval(cb);
+                      if (!fn)
+                      {
+                        return;
+                      }
+
+                      if (!scope.$root.$$phase) {
+                          scope.$parent.$apply(function () {
+                              fn.apply(scope.$parent, args);
+                          });
+                      } else {
+                          fn.apply(scope.$parent, args);
+                      }
+
                     };
 
                 }
