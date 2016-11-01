@@ -165,7 +165,7 @@ $scope.submit = function() {
                     type="text"
                     class="form-control" 
                     ng-model="maskedEventValue"
-                    mask-events="onChange:onChangeValue;"
+                    mask-events="{onChange:'onChangeEvent'}"
                     mask-input="00:00:00"/>
               </div>
             <br/>
@@ -179,15 +179,61 @@ $scope.submit = function() {
                   <code class="language-markup">
   &lt;input type="text" 
   ng-model="maskedEventValue"
-  mask-events="onChange:onChangeValue;"
+  mask-events="{onChange:'onChangeEvent'}"
   mask-input="00:00:00" /&gt;
                   </code>
               </figure>
               <figure class="highlight">
                   <code class="language-javascript">
-$scope.onChangeValue = function() {
+$scope.onChangeEvent = function() {
   console.log("onChange event");
 };
+                  </code>
+              </figure>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Events (Multiple) -->
+        <div class="panel panel-default">
+          <div class="panel-heading">Events (Multiple)</div>
+          <div class="panel-body">
+              <div class="col-xs-6">
+                  <input
+                    type="text"
+                    class="form-control" 
+                    ng-model="maskedEventValueMultiple"
+                    mask-events="{onChange:'onChangeEvent', onComplete:'onCompleteEvent'}"
+                    mask-input="00:00:00"/>
+              </div>
+            <br/>
+            <br/>
+            <div class="col-xs-6">
+              <span class="label label-success">ng-model</span>
+              <span> {{ maskedEventValueMultiple }} </span>
+            </div>
+            <div class="col-xs-12">
+              <figure class="highlight">
+                  <code class="language-markup">
+  &lt;input type="text" 
+  ng-model="maskedEventValueMultiple"
+  mask-events="{onChange:'onChangeEvent', onComplete:'onCompleteEvent'}"
+  mask-input="00:00:00" /&gt;
+                  </code>
+              </figure>
+              <figure class="highlight">
+                  <code class="language-javascript">
+  $scope.onChangeEvent = function(cep) {
+    console.log("onChange event !!!", cep);
+  };
+                  </code>
+              </figure>
+              <figure class="highlight">
+                  <code class="language-javascript">
+  $scope.onCompleteEvent = function(cep) {
+    console.log("onComplete event !!!", cep);
+  };
                   </code>
               </figure>
             </div>
@@ -203,7 +249,7 @@ $scope.onChangeValue = function() {
   <script src="http://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
-  <script src="js/jquery.mask.angular.js"></script>
+  <script src="js/jquery.mask.angular.min.js"></script>
   <script src="js/app.js"></script>
 </body>
 

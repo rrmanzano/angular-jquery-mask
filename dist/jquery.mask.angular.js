@@ -1,5 +1,5 @@
 /**
- * angular-jquery-mask - v0.1
+ * angular-jquery-mask - v0.2
  * A simple wrapper for jquery.mask.js by @igorescobar. This directive allows you to add a mask based on jquery.mask.js plugin.
  * https://github.com/rrmanzano/angular-jquery-mask
  * License: MIT http://opensource.org/licenses/MIT
@@ -34,31 +34,31 @@ angular
 
         var mapEvents = function(){
           if (attrs.maskEvents){
-            var evMap = attrs.maskEvents.split(';');
-            for (var i = 0; i < evMap.length; i++) {
-                if (evMap[i].length > 0) {
-                    var map = evMap[i].split(':');
-                    var name = map[0];
-                    var cb = map[1];
+            var events = scope.$eval(attrs.maskEvents);
+            for (var prop in events) {
+                if (events[prop]) {
+                    (function () {
+                        var propName = prop;
+                        function action() {
+                          var args = arguments;
+                          var cb = events[propName];
+                          var fn = scope.$parent.$eval(cb);
+                          if (!fn)
+                          {
+                            return;
+                          }
 
-                    options[name] = function () {
-                      var args = arguments;
-                      var fn = scope.$parent.$eval(cb);
-                      if (!fn)
-                      {
-                        return;
-                      }
-
-                      if (!scope.$root.$$phase) {
-                          scope.$parent.$apply(function () {
+                          if (!scope.$root.$$phase) {
+                              scope.$parent.$apply(function () {
+                                  fn.apply(scope.$parent, args);
+                              });
+                          } else {
                               fn.apply(scope.$parent, args);
-                          });
-                      } else {
-                          fn.apply(scope.$parent, args);
-                      }
+                          }
+                        }
 
-                    };
-
+                        options[prop] = action;
+                    } ());
                 }
             }
           }
