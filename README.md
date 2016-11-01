@@ -56,9 +56,20 @@ $scope.submit = function() { $scope.maskedCurrencyValue = 200000; };
 Subscribe to an event
 
 ```HTML
-<input type="text" ng-model="maskedEventValue" mask-events="onChange:onChangeValue;" mask-input="00:00:00" />
+<input type="text" ng-model="maskedEventValue" mask-events="{onChange:'onChangeEvent'}" mask-input="00:00:00" />
 ```
 
 ```JavaScript
-$scope.onChangeValue = function() { console.log("onChange event"); };
+$scope.onChangeEvent = function() { console.log("onChange event"); };
+```
+
+Subscribe to multiple events
+
+```HTML
+<input type="text" ng-model="maskedEventValueMultiple" mask-events="{onChange:'onChangeEvent', onComplete:'onCompleteEvent'}" mask-input="00:00:00" />
+```
+
+```JavaScript
+$scope.onChangeEvent = function(cep) { console.log("onChange event !!!", cep); };
+$scope.onCompleteEvent = function(cep) { console.log("onComplete event !!!", cep); };
 ```
