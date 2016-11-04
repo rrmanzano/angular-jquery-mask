@@ -1,10 +1,11 @@
+/// <reference path="../typings/index.d.ts" />
+/// <reference path="jquery.mask.angular.d.ts" />
 /**
  * angular-jquery-mask - v0.3
  * A simple wrapper for jquery.mask.js by @igorescobar. This directive allows you to add a mask based on jquery.mask.js plugin.
  * https://github.com/rrmanzano/angular-jquery-mask
  * License: MIT http://opensource.org/licenses/MIT
  */
- 
 var AngularMaskPlugin;
 (function (AngularMaskPlugin) {
     var MaskDirective = (function () {
