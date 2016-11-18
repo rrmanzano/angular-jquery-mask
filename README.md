@@ -13,6 +13,10 @@ This directive allows you to add a mask based on jquery.mask.js plugin.
 
 [jQuery-Mask-Plugin](https://github.com/igorescobar/jQuery-Mask-Plugin)
 
+## Examples and Demo
+
+[Demo](http://htmlpreview.github.io/?https://github.com/rrmanzano/angular-jquery-mask/blob/v1dev/demo/index.html)
+
 ### Installation
 
 Because this is just a wrapper for jquery.mask.js, you need to have it and all of its dependencies installed as a prerequisite.
