@@ -1,5 +1,4 @@
 /// <reference path="../typings/index.d.ts" />
-/// <reference path="jquery.mask.angular.d.ts" />
 
 module AngularMaskPluginUtils
 {
