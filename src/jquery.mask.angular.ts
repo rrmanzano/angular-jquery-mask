@@ -1,12 +1,6 @@
 /// <reference path="../typings/index.d.ts" />
 /// <reference path="jquery.mask.angular.d.ts" />
-
-/**
- * angular-jquery-mask - v0.3
- * A simple wrapper for jquery.mask.js by @igorescobar. This directive allows you to add a mask based on jquery.mask.js plugin.
- * https://github.com/rrmanzano/angular-jquery-mask
- * License: MIT http://opensource.org/licenses/MIT
- */
+/// <reference path="jquery.mask.angular.eventHandler.ts" />
 
 module AngularMaskPlugin
 {
@@ -18,12 +12,15 @@ module AngularMaskPlugin
             options: '=?maskOptions'
         };
 
+        // To solve the minification problem
+        static $inject = ["$scope", "element", "attrs", "ngModel"];
+
         public link($scope: IScopeMaskDirective, element: JQuery, attrs: IAttributesMaskDirective, ngModel: ng.INgModelController)
         {
 
             var options = {};
             if ($scope.options){
-                options = $scope.$eval(attrs.maskOptions);
+                angular.copy($scope.options, options);
             }
 
             ngModel.$parsers.push(function (value) {
@@ -43,7 +40,7 @@ module AngularMaskPlugin
                 var events = $scope.$eval(attrs.maskEvents);
                 for (var prop in events) {
                     if (events[prop]) {
-                        var event = new EventHandler($scope);
+                        var event = new AngularMaskPluginUtils.EventHandler($scope);
                         event.propertyName = events[prop];
                         options[prop] = event.action;
                     }
@@ -54,34 +51,6 @@ module AngularMaskPlugin
             mapEvents();
             element.mask(attrs.maskInput, options);
         }
-    }
-
-    export class EventHandler {
-        private $scope: IScopeMaskDirective;
-        public propertyName: string;
-        public foo = (args: any) => {};
-
-        constructor($scope: IScopeMaskDirective){
-            this.$scope = $scope;
-        }
-
-        public action = (...items: any[]):void =>
-        {
-            var fn = this.$scope.$parent.$eval(this.propertyName);
-            if (!fn)
-            {
-                return;
-            }
-
-            if (!this.$scope.$root.$$phase) {
-                this.$scope.$parent.$apply(() => {
-                    fn.apply(this.$scope.$parent, items);
-                });
-            } else {
-                fn.apply(this.$scope.$parent, items);
-            }
-        }
-
     }
 }
 
