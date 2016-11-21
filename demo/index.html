@@ -20,7 +20,7 @@
         <!-- Basic -->
         <div class="panel panel-default">
           <div class="panel-heading">Basic</div>
-          <div class="panel-body">
+          <div class="panel-body ng-cloak">
               <div class="col-xs-6">
                 <input
                     type="text"
@@ -36,10 +36,10 @@
             </div>
             <div class="col-xs-12">
               <figure class="highlight">
-                  <code class="language-markup">
-  &lt;input type="text" 
-  ng-model="maskedPhoneValue"
-  mask-input="0000-0000" /&gt;
+                <code class="language-markup">
+                  &lt;input type="text" 
+                  ng-model="maskedPhoneValue"
+                  mask-input="0000-0000" /&gt;
                   </code>
               </figure>
             </div>
@@ -50,7 +50,7 @@
         <!-- Clear mask -->
         <div class="panel panel-default">
           <div class="panel-heading">Clear mask</div>
-          <div class="panel-body">
+          <div class="panel-body ng-cloak">
               <div class="col-xs-6">
                 <input
                     type="text"
@@ -68,21 +68,20 @@
             <div class="col-xs-12">
               <figure class="highlight">
                   <code class="language-markup">
-  &lt;input type="text" 
-  ng-model="maskedPhoneUSCleanValue"
-  mask-model-clean="true"
-  mask-input="(000) 000-0000" /&gt;
+                    &lt;input type="text" 
+                    ng-model="maskedPhoneUSCleanValue"
+                    mask-model-clean="true"
+                    mask-input="(000) 000-0000" /&gt;
                   </code>
               </figure>
             </div>
-
           </div>
         </div>
 
         <!-- With options -->
         <div class="panel panel-default">
           <div class="panel-heading">With options</div>
-          <div class="panel-body">
+          <div class="panel-body ng-cloak">
               <div class="col-xs-6">
                 <input
                     type="text"
@@ -100,21 +99,20 @@
             <div class="col-xs-12">
               <figure class="highlight">
                   <code class="language-markup">
-  &lt;input type="text" 
-  ng-model="maskedDatePlaceholder"
-  mask-options="{placeholder: '__/__/____'}"
-  mask-input="00/00/0000" /&gt;
+                    &lt;input type="text" 
+                    ng-model="maskedDatePlaceholder"
+                    mask-options="{placeholder: '__/__/____'}"
+                    mask-input="00/00/0000" /&gt;
                   </code>
               </figure>
             </div>
-
           </div>
         </div>
 
         <!-- Set value programmatically -->
         <div class="panel panel-default">
           <div class="panel-heading">Set value programmatically</div>
-          <div class="panel-body">
+          <div class="panel-body ng-cloak">
 
               <div class="col-xs-6">
                 <div class="input-group">
@@ -140,29 +138,28 @@
             <div class="col-xs-12">
               <figure class="highlight">
                   <code class="language-markup">
-  &lt;input type="text" 
-  ng-model="maskedCurrencyValue"
-  mask-input="#'##0"
-  mask-model-clean="true"
-  mask-options="{reverse: true}" /&gt;
+                    &lt;input type="text" 
+                    ng-model="maskedCurrencyValue"
+                    mask-input="#'##0"
+                    mask-model-clean="true"
+                    mask-options="{reverse: true}" /&gt;
                   </code>
               </figure>
               <figure class="highlight">
                   <code class="language-javascript">
-$scope.submit = function() {
-  $scope.maskedCurrencyValue = 200000;
-};
+                    $scope.submit = function() {
+                      $scope.maskedCurrencyValue = 200000;
+                    };
                   </code>
               </figure>
             </div>
-
           </div>
         </div>
 
         <!-- Events -->
         <div class="panel panel-default">
           <div class="panel-heading">Events</div>
-          <div class="panel-body">
+          <div class="panel-body ng-cloak">
               <div class="col-xs-6">
                   <input
                     type="text"
@@ -180,28 +177,27 @@ $scope.submit = function() {
             <div class="col-xs-12">
               <figure class="highlight">
                   <code class="language-markup">
-  &lt;input type="text" 
-  ng-model="maskedEventValue"
-  mask-events="{onChange:'onChangeEvent'}"
-  mask-input="00:00:00" /&gt;
+                    &lt;input type="text" 
+                    ng-model="maskedEventValue"
+                    mask-events="{onChange:'onChangeEvent'}"
+                    mask-input="00:00:00" /&gt;
                   </code>
               </figure>
               <figure class="highlight">
                   <code class="language-javascript">
-$scope.onChangeEvent = function() {
-  console.log("onChange event");
-};
+                    $scope.onChangeEvent = function() {
+                      console.log("onChange event");
+                    };
                   </code>
               </figure>
             </div>
-
           </div>
         </div>
 
         <!-- Events (Multiple) -->
         <div class="panel panel-default">
           <div class="panel-heading">Events (Multiple)</div>
-          <div class="panel-body">
+          <div class="panel-body ng-cloak">
               <div class="col-xs-6">
                   <input
                     type="text"
@@ -219,31 +215,29 @@ $scope.onChangeEvent = function() {
             <div class="col-xs-12">
               <figure class="highlight">
                   <code class="language-markup">
-  &lt;input type="text" 
-  ng-model="maskedEventValueMultiple"
-  mask-events="{onChange:'onChangeEvent', onComplete:'onCompleteEvent'}"
-  mask-input="00:00:00" /&gt;
+                    &lt;input type="text" 
+                    ng-model="maskedEventValueMultiple"
+                    mask-events="{onChange:'onChangeEvent', onComplete:'onCompleteEvent'}"
+                    mask-input="00:00:00" /&gt;
                   </code>
               </figure>
               <figure class="highlight">
                   <code class="language-javascript">
-  $scope.onChangeEvent = function(cep) {
-    console.log("onChange event !!!", cep);
-  };
+                    $scope.onChangeEvent = function(cep) {
+                      console.log("onChange event !!!", cep);
+                    };
                   </code>
               </figure>
               <figure class="highlight">
                   <code class="language-javascript">
-  $scope.onCompleteEvent = function(cep) {
-    console.log("onComplete event !!!", cep);
-  };
+                    $scope.onCompleteEvent = function(cep) {
+                      console.log("onComplete event !!!", cep);
+                    };
                   </code>
               </figure>
             </div>
-
           </div>
         </div>
-
     </div>
   </div>
 
