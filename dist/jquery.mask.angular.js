@@ -1,5 +1,5 @@
 /**
- * angular-jquery-mask - v0.4
+ * angular-jquery-mask - v0.5
  * A simple wrapper for jquery.mask.js by @igorescobar. This directive allows you to add a mask based on jquery.mask.js plugin.
  * https://github.com/rrmanzano/angular-jquery-mask
  * License: MIT http://opensource.org/licenses/MIT
@@ -13,7 +13,7 @@ var AngularMaskPluginUtils;
             this.action = function () {
                 var items = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
-                    items[_i - 0] = arguments[_i];
+                    items[_i] = arguments[_i];
                 }
                 var fn = _this.$scope.$parent.$eval(_this.propertyName);
                 if (!fn) {
@@ -58,6 +58,10 @@ var AngularMaskPlugin;
                 }
             });
             ngModel.$formatters.push(function (value) {
+                if (!value) {
+                    element.unmask().mask(attrs.maskInput, options);
+                    return value;
+                }
                 return element.masked(value);
             });
             var mapEvents = function () {

@@ -159,6 +159,52 @@
           </div>
         </div>
 
+        <!-- Clear value programmatically -->
+        <div class="panel panel-default">
+          <div class="panel-heading">Clear value programmatically</div>
+          <div class="panel-body ng-cloak">
+
+              <div class="col-xs-6">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control" 
+                    ng-model="maskedCurrencyValueClear"
+                    mask-input="#'##0"
+                    mask-model-clean="true"
+                    mask-options="{reverse: true}" />
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" ng-click="clear()">Clear value</button>
+                  </span>
+                </div>
+              </div>
+            <br/>
+            <br/>
+            <div class="col-xs-6">
+              <span class="label label-success">ng-model</span>
+              <span> {{ maskedCurrencyValueClear }} </span>
+            </div>
+            <div class="col-xs-12">
+              <figure class="highlight">
+                  <code class="language-markup">
+                    &lt;input type="text" 
+                    ng-model="maskedCurrencyValueClear"
+                    mask-input="#'##0"
+                    mask-model-clean="true"
+                    mask-options="{reverse: true}" /&gt;
+                  </code>
+              </figure>
+              <figure class="highlight">
+                  <code class="language-javascript">
+                    $scope.clear = function() {
+                      delete $scope.maskedCurrencyValueClear; // Or $scope.maskedCurrencyValueClear = null;
+                    };
+                  </code>
+              </figure>
+            </div>
+          </div>
+        </div>
+
         <!-- Events -->
         <div class="panel panel-default">
           <div class="panel-heading">Events</div>
@@ -241,6 +287,7 @@
             </div>
           </div>
         </div>
+
     </div>
   </div>
 
@@ -249,8 +296,7 @@
   <script src="http://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
-  <script src="../lib/jquery.mask.angular.eventHandler.js"></script>
-  <script src="../lib/jquery.mask.angular.js"></script>
+  <script src="../dist/jquery.mask.angular.js"></script>
   <script src="js/app.js"></script>
 </body>
 

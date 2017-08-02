@@ -1,4 +1,3 @@
-/// <reference path="../typings/index.d.ts" />
 /// <reference path="jquery.mask.angular.d.ts" />
 /// <reference path="jquery.mask.angular.eventHandler.ts" />
 
@@ -18,7 +17,7 @@ module AngularMaskPlugin
         public link($scope: IScopeMaskDirective, element: JQuery, attrs: IAttributesMaskDirective, ngModel: ng.INgModelController)
         {
 
-            var options = {};
+            var options = {} as any;
             if ($scope.options){
                 angular.copy($scope.options, options);
             }
@@ -32,7 +31,12 @@ module AngularMaskPlugin
             });
 
             ngModel.$formatters.push(function (value) {
-              return element.masked(value);
+                if (!value){
+                    element.unmask().mask(attrs.maskInput, options);
+                    return value;
+                }
+
+                return element.masked(value);
             });
 
             var mapEvents = function(){

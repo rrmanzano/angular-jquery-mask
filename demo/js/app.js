@@ -13,5 +13,9 @@ app.controller('exampleController', ['$scope',
     $scope.submit = function() {
       $scope.maskedCurrencyValue = 200000;
     };
+
+    $scope.clear = function() {
+      delete $scope.maskedCurrencyValueClear; // Or $scope.maskedCurrencyValueClear = null;
+    };
   }
 ]);

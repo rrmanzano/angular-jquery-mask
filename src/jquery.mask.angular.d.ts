@@ -1,10 +1,9 @@
-/// <reference path="../typings/index.d.ts" />
-
 interface JQuery
 {
-    cleanVal();
-    masked(value:any);
-    mask(maskInput: string, options: any);
+    cleanVal(): any;
+    masked(value:any): any;
+    mask(maskInput: string, options: any): any;
+    unmask():any;
 }
 
 interface IScopeMaskDirective extends ng.IScope
