@@ -1,12 +1,12 @@
 /**
- * angular-jquery-mask - v0.5
+ * angular-jquery-mask - v0.6
  * A simple wrapper for jquery.mask.js by @igorescobar. This directive allows you to add a mask based on jquery.mask.js plugin.
  * https://github.com/rrmanzano/angular-jquery-mask
  * License: MIT http://opensource.org/licenses/MIT
  **/
 var AngularMaskPluginUtils;
 (function (AngularMaskPluginUtils) {
-    var EventHandler = (function () {
+    var EventHandler =  (function () {
         function EventHandler($scope) {
             var _this = this;
             this.foo = function (args) { };
@@ -36,54 +36,57 @@ var AngularMaskPluginUtils;
 })(AngularMaskPluginUtils || (AngularMaskPluginUtils = {}));
 var AngularMaskPlugin;
 (function (AngularMaskPlugin) {
-    var MaskDirective = (function () {
+    var MaskDirective =  (function () {
         function MaskDirective() {
             this.restrict = 'A';
             this.require = 'ngModel';
             this.scope = {
                 options: '=?maskOptions'
             };
-        }
-        MaskDirective.prototype.link = function ($scope, element, attrs, ngModel) {
-            var options = {};
-            if ($scope.options) {
-                angular.copy($scope.options, options);
-            }
-            ngModel.$parsers.push(function (value) {
-                if (!attrs.maskModelClean) {
-                    return value;
+            this.link = function ($scope, element, $attrs, ngModel) {
+                var options = {};
+                if ($scope.options) {
+                    angular.copy($scope.options, options);
                 }
-                else {
-                    return element.cleanVal();
-                }
-            });
-            ngModel.$formatters.push(function (value) {
-                if (!value) {
-                    element.unmask().mask(attrs.maskInput, options);
-                    return value;
-                }
-                return element.masked(value);
-            });
-            var mapEvents = function () {
-                if (attrs.maskEvents) {
-                    var events = $scope.$eval(attrs.maskEvents);
-                    for (var prop in events) {
-                        if (events[prop]) {
-                            var event = new AngularMaskPluginUtils.EventHandler($scope);
-                            event.propertyName = events[prop];
-                            options[prop] = event.action;
+                ngModel.$parsers.push(function (value) {
+                    if (!$attrs.maskModelClean) {
+                        return value;
+                    }
+                    else {
+                        return element.cleanVal();
+                    }
+                });
+                ngModel.$formatters.push(function (value) {
+                    if (!value) {
+                        element.unmask().mask($attrs.maskInput, options);
+                        return value;
+                    }
+                    return element.masked(value);
+                });
+                var mapEvents = function () {
+                    if ($attrs.maskEvents) {
+                        var events = $scope.$eval($attrs.maskEvents);
+                        for (var prop in events) {
+                            if (events[prop]) {
+                                var event = new AngularMaskPluginUtils.EventHandler($scope);
+                                event.propertyName = events[prop];
+                                options[prop] = event.action;
+                            }
                         }
                     }
-                }
+                };
+                mapEvents();
+                element.mask($attrs.maskInput, options);
             };
-            mapEvents();
-            element.mask(attrs.maskInput, options);
+        }
+        MaskDirective.factory = function () {
+            var directive = function ($timeout) { return new MaskDirective(); };
+            return directive;
         };
-        MaskDirective.$inject = ["$scope", "element", "attrs", "ngModel"];
         return MaskDirective;
     }());
     AngularMaskPlugin.MaskDirective = MaskDirective;
 })(AngularMaskPlugin || (AngularMaskPlugin = {}));
 angular
     .module('angular-mask-plugin', [])
-    .directive('maskInput', function () { return new AngularMaskPlugin.MaskDirective; });
+    .directive('maskInput', AngularMaskPlugin.MaskDirective.factory());

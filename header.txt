@@ -1,5 +1,5 @@
 /**
- * angular-jquery-mask - v0.5
+ * angular-jquery-mask - v0.6
  * A simple wrapper for jquery.mask.js by @igorescobar. This directive allows you to add a mask based on jquery.mask.js plugin.
  * https://github.com/rrmanzano/angular-jquery-mask
  * License: MIT http://opensource.org/licenses/MIT
